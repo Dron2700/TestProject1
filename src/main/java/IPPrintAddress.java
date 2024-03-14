@@ -54,30 +54,42 @@ public class IPPrintAddress {
 
 
     private static void printIp (IPPrintAddress ipAddress){
-        int from=ipAddress.addressArrayFrom[3]+1;
-        int to =ipAddress.addressArrayTo[3];
+        int from3=ipAddress.addressArrayFrom[3]+1;
+        int to1,to2,to3 ;//=ipAddress.addressArrayTo[3];
 
         System.out.println("Вывод диапазона:");
 
-        while (ipAddress.addressArrayFrom[0]<=ipAddress.addressArrayTo[0]){
+        while (ipAddress.addressArrayFrom[0]<=ipAddress.addressArrayTo[0] && ipAddress.addressArrayFrom[0]<256){
 
-            while (ipAddress.addressArrayFrom[1]<=ipAddress.addressArrayTo[1]){
+            if (ipAddress.addressArrayFrom[0]==ipAddress.addressArrayTo[0]){
+                to1 =ipAddress.addressArrayTo[1];
+            } else {
+                to1=256;
+            }
 
-                while (ipAddress.addressArrayFrom[2]<=ipAddress.addressArrayTo[2]){
+            while (ipAddress.addressArrayFrom[1]<=to1 && ipAddress.addressArrayFrom[1]<256 ){
+
+                if (ipAddress.addressArrayFrom[1]==ipAddress.addressArrayTo[1]){
+                    to2 =ipAddress.addressArrayTo[2];
+                } else {
+                    to2=256;
+                }
+
+                while (ipAddress.addressArrayFrom[2]<=to2 && ipAddress.addressArrayFrom[2]<256){
 
                     if (ipAddress.addressArrayFrom[2]==ipAddress.addressArrayTo[2]){
-                        to =ipAddress.addressArrayTo[3];
+                        to3 =ipAddress.addressArrayTo[3];
                     } else {
-                        to=256;
+                        to3=256;
                     }
-                    while (from<to && from<256){
+                    while (from3<to3 && from3<256){
 
-                        System.out.println(ipAddress.addressArrayFrom[0]+"."+ipAddress.addressArrayFrom[1]+"."+ipAddress.addressArrayFrom[2]+"."+from);
-                        from++;
+                        System.out.println(ipAddress.addressArrayFrom[0]+"."+ipAddress.addressArrayFrom[1]+"."+ipAddress.addressArrayFrom[2]+"."+from3);
+                        from3++;
 
                     }
                     ipAddress.addressArrayFrom[2]++;
-                    from=0;
+                    from3=0;
 
                 }
                 ipAddress.addressArrayFrom[1]++;
@@ -101,8 +113,8 @@ public class IPPrintAddress {
         System.out.println("Введите конец диапазона:");
         ipAddress.addressTo = scanner.nextLine();
 
-        //  ipAddress.addressFrom = "192.168.0.1";
-        // ipAddress.addressTo = "192.168.1.5";
+        //  ipAddress.addressFrom = "192.168.254.52";
+        //  ipAddress.addressTo = "192.169.1.2";
 
         System.out.println("Введены значения диапазона:");
         System.out.println(ipAddress.addressFrom);
