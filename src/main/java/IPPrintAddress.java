@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -15,41 +16,33 @@ public class IPPrintAddress {
     }
 
 
-    private static void fillIpAddressNumber (String str, int[] intArray ){
+    private static void fillIpAddressNumber  (String str, int[] intArray ) throws NumberFormatException {
         String[] strArray = str.split(Pattern.quote("."));
         int valueOfString=0;
         if (strArray.length!=4){
-            System.out.println("Не корректный адрес IP, не соответствует количество октетов");
-            System.exit(0);
+           throw new NumberFormatException();
         }
 
         for (int i=0; i< strArray.length;i++){
-            try{
-                valueOfString=Integer.valueOf(strArray[i]);}
-            catch (NumberFormatException e) {
-                System.err.println("Неправильный формат строки!");
-            }
+             valueOfString=Integer.valueOf(strArray[i]);
 
             if (valueOfString>=0 && valueOfString<256){
                 intArray[i]= valueOfString;
             }
             else {
-                System.out.println("Не корректный адрес IP2");
-                System.exit(0);
+                throw new NumberFormatException();
             }
 
         }
     }
 
 
-    private static Boolean compareRangeIP (IPPrintAddress ipAddress){
+    private static  void compareRangeIP (IPPrintAddress ipAddress) throws Exception {
         if (ipAddress.addressArrayTo[0]<=ipAddress.addressArrayFrom[0] & ipAddress.addressArrayTo[1]<=ipAddress.addressArrayFrom[1] &
                 ipAddress.addressArrayTo[2]<=ipAddress.addressArrayFrom[2] & ipAddress.addressArrayTo[3]<=ipAddress.addressArrayFrom[3]) {
-            return true;
-        } else {
-            return false;
+            throw new Exception("Введен не корректный диапазон");
+            }
         }
-    }
 
 
 
@@ -126,16 +119,19 @@ public class IPPrintAddress {
             System.exit(0);
         }
 
+        try {
+            fillIpAddressNumber(ipAddress.addressFrom, ipAddress.addressArrayFrom);
+            fillIpAddressNumber(ipAddress.addressTo, ipAddress.addressArrayTo);
 
-        fillIpAddressNumber(ipAddress.addressFrom,ipAddress.addressArrayFrom);
-        fillIpAddressNumber(ipAddress.addressTo,ipAddress.addressArrayTo);
+            compareRangeIP(ipAddress);
 
-        if (compareRangeIP(ipAddress)) {
-            System.out.println("Введен не корректный диапазон");
-            System.exit(0);
+            printIp(ipAddress);
+
+        } catch (NumberFormatException e){
+            System.out.println("Не корректный адрес IP");
+        } catch (Exception e ){
+            System.out.println(e);
         }
-
-        printIp(ipAddress);
 
 
 
