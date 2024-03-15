@@ -1,4 +1,3 @@
-import java.text.ParseException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -8,19 +7,18 @@ public class IPPrintAddress {
     int[]  addressArrayFrom= new int[4];
     int[]  addressArrayTo= new int[4];
 
-    private static Boolean compareIp  (IPPrintAddress ip){
+    private static void  compareIp  (IPPrintAddress ip) throws Exception {
         if (ip.addressFrom.equals(ip.addressTo)){
-            return true;}
-        else {
-            return false;}
+            throw new Exception("Введены одинаковые значения");}
+
     }
 
 
-    private static void fillIpAddressNumber  (String str, int[] intArray ) throws NumberFormatException {
+    private static void fillIpAddressNumber  (String str, int[] intArray ) throws Exception {
         String[] strArray = str.split(Pattern.quote("."));
         int valueOfString=0;
         if (strArray.length!=4){
-           throw new NumberFormatException();
+           throw new Exception("Не корректный адрес IP, не соответствует количество октетов");
         }
 
         for (int i=0; i< strArray.length;i++){
@@ -30,7 +28,7 @@ public class IPPrintAddress {
                 intArray[i]= valueOfString;
             }
             else {
-                throw new NumberFormatException();
+                throw new Exception("Не корректный адрес IP");
             }
 
         }
@@ -44,7 +42,13 @@ public class IPPrintAddress {
             }
         }
 
-
+    private static String printTrimException (String strError){
+        if (strError.startsWith("java.lang.Exception:")){
+            return "Ошибка: "+strError.substring(21,strError.length());
+        } else {
+            return strError;
+        }
+    }
 
     private static void printIp (IPPrintAddress ipAddress){
         int from3=ipAddress.addressArrayFrom[3]+1;
@@ -114,12 +118,11 @@ public class IPPrintAddress {
         System.out.println(ipAddress.addressTo);
 
 
-        if ( compareIp(ipAddress)){
-            System.out.println("Введены одинаковые значения");
-            System.exit(0);
-        }
+
 
         try {
+            compareIp(ipAddress);
+
             fillIpAddressNumber(ipAddress.addressFrom, ipAddress.addressArrayFrom);
             fillIpAddressNumber(ipAddress.addressTo, ipAddress.addressArrayTo);
 
@@ -127,10 +130,8 @@ public class IPPrintAddress {
 
             printIp(ipAddress);
 
-        } catch (NumberFormatException e){
-            System.out.println("Не корректный адрес IP");
-        } catch (Exception e ){
-            System.out.println(e);
+            } catch (Exception e ){
+            System.out.println(printTrimException(e.toString()));
         }
 
 
