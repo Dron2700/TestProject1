@@ -10,9 +10,7 @@ public class PhoneBook {
 private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
 
     public ArrayList<String> getContact (String fio){
-
         return  this.numbersOfBook.get(fio);
-
     }
 
    public boolean hasContact (String fio){
