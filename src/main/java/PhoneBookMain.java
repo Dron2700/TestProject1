@@ -17,8 +17,8 @@ public class PhoneBookMain {
 
 
 
-        if (myBook.numbersOfBook.containsKey(fio)){
-            numbers=myBook.numbersOfBook.get(fio);
+        if (myBook.hasContact(fio)){
+            numbers=myBook.getContact(fio);
             for (String number:numbers) {
                 System.out.println(i+". "+number);
                 i++;

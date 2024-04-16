@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class PhoneBook {
 
-    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
+private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
 
     public ArrayList<String> getContact (String fio){
 
@@ -15,6 +15,10 @@ public class PhoneBook {
 
     }
 
+   public boolean hasContact (String fio){
+       return this.numbersOfBook.containsKey(fio) ;
+
+   }
 
    public void fillDefaultValue (){
        String fio;

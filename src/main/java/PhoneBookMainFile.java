@@ -21,7 +21,7 @@ public class PhoneBookMainFile {
 
 
 
-        if (myBook.numbersOfBook.containsKey(fio)){
+        if (myBook.hasContact(fio)){
 //            System.out.println("contact true");
 //            numbers = myBook.numbersOfBook.get(fio);
             numbers = myBook.getContact(fio);
