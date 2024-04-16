@@ -19,9 +19,9 @@ private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
    }
 
    public void fillDefaultValue (){
-       String fio;
-       ArrayList<String> numbers ;
-       int i=1;
+//       String fio;
+//       ArrayList<String> numbers ;
+//       int i=1;
 
        ArrayList<String> phoneNumbers1=new ArrayList<>();
        phoneNumbers1.add("+8 800 2000 500");
@@ -74,7 +74,7 @@ private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
            endFIOposition = lineFile.indexOf("+");
            String fio = lineFile.substring(0, endFIOposition).trim();
            ArrayList<String> phoneNumbers=new ArrayList<>();
-           String []  phoneNumber= lineFile.substring(endFIOposition,lineFile.length()).split(Pattern.quote("+"));;
+           String []  phoneNumber= lineFile.substring(endFIOposition,lineFile.length()).split(Pattern.quote("+"));
            for (String number:phoneNumber){
 
                if (number!="" & number!=null){
