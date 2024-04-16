@@ -48,33 +48,41 @@ private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
 
    }
 
+    public void printContact (String fio){
+
+        ArrayList<String> numbers ;
+        int i=1;
+        if (this.hasContact(fio)){
+
+            numbers = this.getContact(fio);
+
+            for (String number:numbers) {
+                System.out.println(i+". "+number);
+                i++;
+            }
+        }
+        else {
+            System.out.println("Такого ФИО в БД нет");
+        }
+    }
+
    public void fillFromFile (String  path) throws FileNotFoundException {
        File file = new File ( path);
        Scanner scanner = new Scanner (file);
-
-//       ArrayList<String> phoneNumbers=new ArrayList<>();
-
        int endFIOposition;
 
        while ( scanner.hasNextLine() ) {
            String lineFile = scanner.nextLine();
            endFIOposition = lineFile.indexOf("+");
            String fio = lineFile.substring(0, endFIOposition).trim();
-
-//           System.out.println("endFIOposition: "+endFIOposition);
-//           System.out.println("fio: "+lineFile.substring(0, endFIOposition).trim());
-//           System.out.println("nums: "+lineFile.substring(endFIOposition,lineFile.length()));
-
            ArrayList<String> phoneNumbers=new ArrayList<>();
            String []  phoneNumber= lineFile.substring(endFIOposition,lineFile.length()).split(Pattern.quote("+"));;
            for (String number:phoneNumber){
-//               System.out.println("number: "+number);
+
                if (number!="" & number!=null){
                phoneNumbers.add("+"+number.trim());}
            }
            this.addContact(fio,phoneNumbers);
-         //  phoneNumbers.clear();
-//           System.out.println("PhoneContact Save ");
 
        }
        scanner.close();
