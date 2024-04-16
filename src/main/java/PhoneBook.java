@@ -77,7 +77,7 @@ private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
            String []  phoneNumber= lineFile.substring(endFIOposition,lineFile.length()).split(Pattern.quote("+"));
            for (String number:phoneNumber){
 
-               if (number!="" & number!=null){
+               if (!number.equals("")){
                phoneNumbers.add("+"+number.trim());}
            }
            this.addContact(fio,phoneNumbers);
