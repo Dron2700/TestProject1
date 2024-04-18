@@ -17,10 +17,11 @@ public class PhoneBookMainFile {
             System.out.println(e.getMessage());
         }
 
-        PhoneBook myBook2= new PhoneBook();
+        PhoneBook myBook2= null;
 
         try {
-        myBook2= (PhoneBook) myBook2.loadPhoneBookFromFile("c:\\Users\\Dron2\\IdeaProjects\\TestProjects1\\src\\main\\java\\person.dat");
+              myBook2=  (PhoneBook) myBook.loadPhoneBookFromFile("c:\\Users\\Dron2\\IdeaProjects\\TestProjects1\\src\\main\\java\\person.dat");
+       // myBook2= (PhoneBook) myBook2.loadPhoneBookFromFile("c:\\Users\\Dron2\\IdeaProjects\\TestProjects1\\src\\main\\java\\person.dat");
 
        //     myBook2.loadPhoneBookFromFile("c:\\Users\\Dron2\\IdeaProjects\\TestProjects1\\src\\main\\java\\person.dat");
         } catch (IOException e) {

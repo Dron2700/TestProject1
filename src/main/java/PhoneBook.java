@@ -6,6 +6,23 @@ import java.util.regex.Pattern;
 
 public class PhoneBook implements Serializable {
 
+    public PhoneBook (){
+
+    }
+
+    public PhoneBook PhoneBook(String fileName) throws IOException, ClassNotFoundException {
+
+        File fileToSave = new File(fileName);
+        FileInputStream fileInputStream = new FileInputStream(fileToSave);
+        ObjectInputStream objectLoad = new ObjectInputStream(fileInputStream);
+        PhoneBook pb = (PhoneBook) objectLoad.readObject();
+        objectLoad.close();
+        return pb;
+    }
+
+
+
+
 private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
 
     public ArrayList<String> getContact (String fio){
