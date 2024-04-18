@@ -1,11 +1,10 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class PhoneBook {
+public class PhoneBook implements Serializable {
 
 private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
 
@@ -88,6 +87,27 @@ private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
    }
 
 
+   public void savePhoneBookToFile (String fileName) throws IOException {
+
+
+       File fileToSave = new File(fileName);
+       FileOutputStream fileOuputStream = new FileOutputStream( fileToSave );
+       ObjectOutputStream objectSave = new ObjectOutputStream(fileOuputStream);
+       objectSave.writeObject(this);
+       objectSave.close();
+
+   }
+
+   public Object loadPhoneBookFromFile (String fileName) throws IOException, ClassNotFoundException {
+
+        File fileToSave = new File(fileName);
+        FileInputStream fileInputStream = new FileInputStream(fileToSave);
+        ObjectInputStream objectLoad = new ObjectInputStream(fileInputStream);
+        PhoneBook pb = (PhoneBook) objectLoad.readObject();
+        objectLoad.close();
+        return pb;
+
+   }
 
     public static void main(String[] args) {
 
