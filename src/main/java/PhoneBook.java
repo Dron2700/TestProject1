@@ -1,29 +1,33 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class PhoneBook implements Serializable {
 
-    public PhoneBook (){
+    private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
 
+
+    public PhoneBook (){
     }
 
-    public PhoneBook PhoneBook(String fileName) throws IOException, ClassNotFoundException {
+    public  PhoneBook(String fileName) throws IOException, ClassNotFoundException {
 
         File fileToSave = new File(fileName);
         FileInputStream fileInputStream = new FileInputStream(fileToSave);
         ObjectInputStream objectLoad = new ObjectInputStream(fileInputStream);
         PhoneBook pb = (PhoneBook) objectLoad.readObject();
         objectLoad.close();
-        return pb;
+
+
+        for (Map.Entry <String, ArrayList> entry : pb.numbersOfBook.entrySet()) {
+           this.addContact(entry.getKey(), entry.getValue());
+        }
+
     }
 
-
-
-
-private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
 
     public ArrayList<String> getContact (String fio){
         return  this.numbersOfBook.get(fio);
@@ -35,9 +39,7 @@ private    HashMap <String, ArrayList> numbersOfBook= new HashMap<>() ;
    }
 
    public void fillDefaultValue (){
-//       String fio;
-//       ArrayList<String> numbers ;
-//       int i=1;
+
 
        ArrayList<String> phoneNumbers1=new ArrayList<>();
        phoneNumbers1.add("+8 800 2000 500");

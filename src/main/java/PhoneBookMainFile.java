@@ -4,31 +4,29 @@ import java.util.Scanner;
 
 public class PhoneBookMainFile {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         String fio;
         PhoneBook myBook= new PhoneBook();
 
-        myBook.fillFromFile("c:\\Users\\Dron2\\IdeaProjects\\TestProjects1\\src\\main\\java\\PhoneNumber");
+        myBook.fillFromFile(".\\src\\main\\java\\PhoneNumber");
 
         try {
-            myBook.savePhoneBookToFile("c:\\Users\\Dron2\\IdeaProjects\\TestProjects1\\src\\main\\java\\person.dat");
+            myBook.savePhoneBookToFile(".\\src\\main\\java\\person.dat");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
-        PhoneBook myBook2= null;
+        PhoneBook myBook2= new PhoneBook(".\\src\\main\\java\\person.dat");
 
-        try {
-              myBook2=  (PhoneBook) myBook.loadPhoneBookFromFile("c:\\Users\\Dron2\\IdeaProjects\\TestProjects1\\src\\main\\java\\person.dat");
-       // myBook2= (PhoneBook) myBook2.loadPhoneBookFromFile("c:\\Users\\Dron2\\IdeaProjects\\TestProjects1\\src\\main\\java\\person.dat");
-
-       //     myBook2.loadPhoneBookFromFile("c:\\Users\\Dron2\\IdeaProjects\\TestProjects1\\src\\main\\java\\person.dat");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//              myBook2=  new PhoneBook(".\\src\\main\\java\\person.dat");
+//
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        } catch (ClassNotFoundException e) {
+//            System.out.println(e.getMessage());
+//        }
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите ФИО: ");
